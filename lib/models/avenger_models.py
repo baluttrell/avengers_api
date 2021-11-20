@@ -1,7 +1,7 @@
 from lib.models import Base
 
 from sqlalchemy.ext import hybrid
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, selectinload, joinedload
 from sqlalchemy_utils import generic_relationship
 
 import datetime
@@ -36,6 +36,16 @@ class Avenger(Base):
 
         return current_year - self.year
 
+    @classmethod
+    def fetch_prototype(cls, session):
+        """
+        Return the query prototype for the Avenger class. The prototype can be modified further by the caller
+        :param session: The database session to use
+        """
+        return session \
+            .query(cls) \
+            .options(selectinload(cls.deaths))
+
 
 class Death(Base):
     __tablename__ = "deaths"
@@ -48,6 +58,16 @@ class Death(Base):
     sequence = sa.Column("sequence", sa.BigInteger, nullable=False)
 
     avenger = relationship("Avenger", back_populates="deaths", uselist=False)
+
+    @classmethod
+    def fetch_prototype(cls, session):
+        """
+        Return the query prototype for the Death class. The prototype can be modified further by the caller
+        :param session: The database session to use
+        """
+        return session \
+            .query(cls) \
+            .options(joinedload(cls.avenger))
 
 
 class Log(Base):
