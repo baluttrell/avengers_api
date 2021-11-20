@@ -7,4 +7,6 @@
    * The default username for initializing a new database and/or the username to use when connecting to an existing 
    database
 3. DATABASE_NAME
-   * The default database name when initializing a new database and/or the name of the database which to connect to 
+   * The default database name when initializing a new database and/or the name of the database which to connect to
+4. ENV
+   * The running environment for the application, e.g. 'development' or 'production'

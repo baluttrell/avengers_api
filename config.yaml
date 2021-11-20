@@ -1,0 +1,5 @@
+development:
+  database_url: postgresql://brandon:<db_password>@localhost:5432/avengers
+
+production:
+  database_url: postgresql://<username>:<db_password>@some-awesome-domain.com:5432/avengers
