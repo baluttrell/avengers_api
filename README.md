@@ -10,3 +10,7 @@
    * The default database name when initializing a new database and/or the name of the database which to connect to
 4. ENV
    * The running environment for the application, e.g. 'development' or 'production'
+
+## Setup Steps
+1. Create .env file and set environment variables
+2. Run docker-compose using provided docker-compose file

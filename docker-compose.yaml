@@ -10,3 +10,14 @@ services:
       POSTGRES_DB: $DATABASE_NAME
     ports:
       - 5432:5432
+    volumes:
+      - /dev/avengers_api/db:/var/lib/postgresql/data
+
+  api:
+    build: ./lib
+    environment:
+      GIT_COMMIT: $GIT_COMMIT
+    ports:
+      - "80:8080"
+    volumes:
+      - /dev/avengers_api/logs:/usr/src/app/logs

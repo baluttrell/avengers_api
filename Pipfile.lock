@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "26b2f53b977634f68625490886435a7fc98ac8cf020103ef6b03d7f7b50049b0"
+            "sha256": "7a79a87e1be8ff554847314dd87674889cc184c68956952ef02f8d9f81acaef2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -54,6 +54,14 @@
             ],
             "index": "pypi",
             "version": "==2.0.2"
+        },
+        "flask-cors": {
+            "hashes": [
+                "sha256:74efc975af1194fc7891ff5cd85b0f7478be4f7f59fe158102e91abb72bb4438",
+                "sha256:b60839393f3b84a0f3746f6cdca56c1ad7426aa738b70d6c61375857823181de"
+            ],
+            "index": "pypi",
+            "version": "==3.0.10"
         },
         "greenlet": {
             "hashes": [
@@ -110,6 +118,14 @@
             ],
             "markers": "python_version >= '3' and platform_machine == 'aarch64' or (platform_machine == 'ppc64le' or (platform_machine == 'x86_64' or (platform_machine == 'amd64' or (platform_machine == 'AMD64' or (platform_machine == 'win32' or platform_machine == 'WIN32')))))",
             "version": "==1.1.2"
+        },
+        "gunicorn": {
+            "hashes": [
+                "sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e",
+                "sha256:e0a968b5ba15f8a328fdfd7ab1fcb5af4470c28aaf7e55df02a99bc13138e6e8"
+            ],
+            "index": "pypi",
+            "version": "==20.1.0"
         },
         "idna": {
             "hashes": [
@@ -322,6 +338,14 @@
             ],
             "index": "pypi",
             "version": "==2.26.0"
+        },
+        "setuptools": {
+            "hashes": [
+                "sha256:157d21de9d055ab9e8ea3186d91e7f4f865e11f42deafa952d90842671fc2576",
+                "sha256:4adde3d1e1c89bde1c643c64d89cdd94cbfd8c75252ee459d4500bccb9c7d05d"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==59.2.0"
         },
         "six": {
             "hashes": [
