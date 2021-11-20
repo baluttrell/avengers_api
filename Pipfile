@@ -11,6 +11,8 @@ marshmallow = "*"
 python-dotenv = "*"
 alembic = "*"
 psycopg2-binary = "*"
+requests = "*"
+sqlalchemy-utils = "*"
 
 [dev-packages]
 
