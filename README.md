@@ -18,5 +18,5 @@
 ## Setup Steps
 1. Create .env file and set environment variables
 2. Run docker-compose using provided docker-compose file
-3. Run alembic migrations on database
+3. Run alembic migrations on database - 'pipenv run alembic upgrade head'
 4. Restart API service in docker-compose
