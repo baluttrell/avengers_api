@@ -154,3 +154,4 @@ avengers_ui/dist
 *.njsproj
 *.sln
 *.sw?
+/node_modules/.yarn-integrity

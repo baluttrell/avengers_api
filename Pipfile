@@ -15,6 +15,7 @@ requests = "*"
 sqlalchemy-utils = "*"
 gunicorn = "*"
 flask-cors = "*"
+python-dateutil = "*"
 
 [dev-packages]
 

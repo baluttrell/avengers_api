@@ -8,6 +8,7 @@ Create Date: 2021-11-20 10:32:05.379922
 from setup import fetch_avenger_data
 
 from alembic import op
+from dateutil import relativedelta
 from sqlalchemy import orm
 
 import datetime
@@ -95,7 +96,7 @@ def load_avenger_models():
                           current=item.current == "YES",
                           gender=item.gender,
                           probationary=parse_date(item.probationary),
-                          full_reserve=parse_date(item.full_reserve),
+                          full_reserve=parse_date(item.full_reserve, item.year),
                           year=item.year,
                           honorary=item.honorary,
                           notes=item.notes)
@@ -117,7 +118,7 @@ def load_avenger_models():
     return avengers
 
 
-def parse_date(date_string):
+def parse_date(date_string, year=None):
     """
     Return the datetime object the provided string represents. The data is expected to be in the format of mmm-yy, but
     formatting issues in the CSV file mistakenly converted some data points to d-mmm. This function attempts to rectify
@@ -136,5 +137,8 @@ def parse_date(date_string):
             parts[0] = parts[0].zfill(2)
 
             date_obj = datetime.datetime.strptime('-'.join(parts), "%y-%b")
+
+        if year:
+            date_obj = datetime.datetime(year=int(year), month=date_obj.month, day=1)
 
     return date_obj

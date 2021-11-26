@@ -46,6 +46,39 @@ class Avenger(Base):
             .query(cls) \
             .options(selectinload(cls.deaths))
 
+    @classmethod
+    def get_return_probability(cls, avenger_id, session):
+        """
+        Return the percent probability that the avenger identified by the provided avenger_id will return from death.
+        If the avenger has already returned from their most recent death, the calculation will assume the avenger dies
+        again, before calculating the return chance
+        :param avenger_id: The unique identifier of the avenger to calculate the percent chance of return
+        :param session: The database session to use
+        """
+        avenger = cls.fetch_prototype(session).get(avenger_id)  # Fetch the avenger
+
+        # Calculate the number of deaths to base the calculation off of.
+        deaths = len(avenger.deaths) if not avenger.deaths[-1].returned else len(avenger.deaths) + 1
+
+        # Fetch the count of avengers with the same number of deaths, and their number of returns
+        matching_avengers = session \
+            .query(cls.id,
+                   sa.func.count(Death.id),
+                   sa.func.sum(sa.case(
+                       (Death.returned == True, 1),
+                       else_=0))) \
+            .join(cls.deaths) \
+            .having(sa.func.count(Death.id) == deaths) \
+            .group_by(cls.id) \
+            .all()
+
+        # Calculate the total number of returns in the fetched list
+        total_returns = sum([item[2] for item in matching_avengers])
+
+        # Calculate the return probability by dividing the total returns by the number of avengers and the number of
+        # deaths
+        return (total_returns / len(matching_avengers) / deaths)
+
 
 class Death(Base):
     __tablename__ = "deaths"
