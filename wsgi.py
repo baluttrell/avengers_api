@@ -1,8 +1,5 @@
 from lib.api import create_app
-import setup
 
-
-setup.run_migrations()
 
 app = create_app()
 
