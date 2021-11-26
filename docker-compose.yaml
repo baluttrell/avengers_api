@@ -10,14 +10,32 @@ services:
       POSTGRES_DB: $DATABASE_NAME
     ports:
       - 5432:5432
-    volumes:
-      - /dev/avengers_api/db:/var/lib/postgresql/data
 
   api:
     build: ./lib
     environment:
+      ENV: staging
       GIT_COMMIT: $GIT_COMMIT
+      DATABASE_PASSWORD: $DATABASE_PASSWORD
+      DATABASE_USER: $DATABASE_USER
+      DATABASE_NAME: $DATABASE_NAME
     ports:
-      - "80:8080"
-    volumes:
-      - /dev/avengers_api/logs:/usr/src/app/logs
+      - "5050:5000"
+    command: pipenv run gunicorn -w 16 -b  0.0.0.0:5000 wsgi:app
+
+
+  ui:
+    build: ./avengers_ui
+    environment:
+      GIT_COMMIT: $GIT_COMMIT
+      VUE_APP_BASE_URL: $VUE_APP_BASE_URL
+    ports:
+      - "8080:8080"
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.170.0.1/16
